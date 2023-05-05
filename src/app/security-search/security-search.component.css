@@ -1,0 +1,84 @@
+.p-t {
+  padding-top: 50px;
+}
+
+.p-l {
+  padding-left: 120px;
+}
+
+.form-setup {
+  border: 1px solid black;
+  background-color: rgb(204, 204, 204);
+  padding: 10px;
+  margin-top: -10px;
+  border-color: rgb(133, 132, 132);
+  max-width: 85%;
+}
+
+.btn-setup {
+  border-color: black;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: 105px;
+  height: 95px;
+  font-size: 15px;
+  margin-top: 5px !important;
+  display: inline-block;
+}
+
+.color-width {
+  width: 130px;
+  background-color: rgb(204, 204, 204);
+  border-color: rgb(204, 204, 204);
+}
+
+.color-blue {
+  color: blue;
+}
+
+.hline {
+  height: 2px;
+  border: none;
+  color: #333;
+  background-color: #333;
+}
+
+.scroll {
+  overflow-y: scroll;
+  max-height: 100px;
+  min-height: 100px;
+  border-top-color: black !important;
+  border-radius: 2px;
+}
+
+.overflow {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.output {
+  width: 100%;
+  border: white;
+  background-color: white;
+  max-height: 30px;
+}
+
+.dropdown-toggle {
+  width: 748px;
+  border: white;
+}
+
+.span-animation {
+  animation: hideAnimation 0s ease-in 5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes hideAnimation {
+  to {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+  }
+}

@@ -1,0 +1,85 @@
+.m-l {
+  margin-left: 100px;
+}
+
+.form-setup {
+  border: 1px solid black;
+  background-color: rgb(204, 204, 204);
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: -10px;
+  border-color: rgb(133, 132, 132);
+  max-width: 85%;
+}
+
+.label-setup {
+  width: 130px;
+  background-color: rgb(204, 204, 204);
+  border-color: rgb(204, 204, 204);
+}
+
+.btn-setup {
+  width: 100%;
+  border: 1px solid black;
+  margin-right: 0px;
+  position: apsolute;
+  display: inline-block;
+}
+
+.popupDiv {
+  width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 60px;
+  padding-top: 6px;
+  text-align: center;
+  border-radius: 4px !important;
+  margin-left: 840px;
+  -webkit-animation: cssAnimation 0s ease-in 5s forwards;
+  /* Safari and Chrome */
+  animation: cssAnimation 0s ease-in 5s forwards;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.green-background {
+  background-color: rgb(96, 243, 170);
+}
+
+.red-background {
+  background-color: rgb(245, 77, 77);
+}
+
+@keyframes cssAnimation {
+  to {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+}
+
+@-webkit-keyframes cssAnimation {
+  to {
+    width: 0;
+    height: 0;
+    visibility: hidden;
+  }
+}
+
+.hrdivider {
+  position: relative;
+  margin-bottom: 20px;
+  width: 100%;
+  text-align: left;
+  height: 3px;
+}
+
+.hrdivider span {
+  position: absolute;
+  top: -11px;
+  padding: 0 20px;
+  background-color: rgb(204, 204, 204);
+  font-weight: bold;
+  font-size: 16px;
+}

@@ -1,0 +1,140 @@
+<div class="row p-t">
+  <div class="col-sm-2">
+  </div>
+  <div class="col-sm-8">
+    <p class="fs-4 p-l">Security Search</p>
+    <div class="container rounded form-setup">
+      <form [formGroup]="searchForm">
+        <div class="row">
+          <div class="col-sm-10">
+            <div class="input-group input-group-sm mb-1">
+              <div class="input-group-prepend">
+                <span class="input-group-text color-width">SID:</span>
+              </div>
+              <input formControlName="sid" type="number" class="form-control mb-0 rounded">
+            </div>
+            <div class="input-group input-group-sm mb-1">
+              <div class="input-group-prepend">
+                <span class="input-group-text color-width">Security Type:</span>
+              </div>
+              <select class="form-select rounded" formControlName="securityType">
+                <option *ngFor="let securityType of securityTypes" [ngValue]="securityType.typeId">
+                  {{securityType.name}}
+                </option>
+                <option value="Default"></option>
+              </select>
+            </div>
+            <div class="container ps-0">
+              <div class="row">
+                <div class="col-10">
+                  <div class="input-group input-group-sm mb-1">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text color-width">Ticker:</span>
+                    </div>
+                    <input formControlName="ticker" type="text" class="form-control rounded">
+                  </div>
+                </div>
+                <div class="col-2 px-0">
+                  <div class="input-group">
+                    <select formControlName="selectTypeTicker" class="form-select rounded">
+                      <option *ngFor="let st of selectType" [ngValue]="st.id">
+                        {{ st.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="container ps-0">
+              <div class="row">
+                <div class="col-10">
+                  <div class="input-group input-group-sm mb-1">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text color-width">Description:</span>
+                    </div>
+                    <input formControlName="description" type="text" class="form-control rounded">
+                  </div>
+                </div>
+                <div class="col-2 px-0">
+                  <div class="input-group">
+                    <select formControlName="selectTypeDescription" class="form-select rounded">
+                      <option *ngFor="let st of selectType" [ngValue]="st.id">
+                        {{ st.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text color-width">Exchange:</span>
+              </div>
+              <select formControlName="exchange" class="form-select rounded">
+                <option *ngFor="let exchange of exchanges" [ngValue]="exchange.exchangeId">
+                  {{exchange.name}}
+                </option>
+                <option value="Default"></option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-2 pt-0">
+            <button class="btn btn-success rounded btn-setup" [disabled]="searchForm.controls['sid'].pristine && searchForm.controls['securityType'].pristine
+               && searchForm.controls['ticker'].pristine && searchForm.controls['description'].pristine
+               && searchForm.controls['exchange'].pristine" (click)="onSearch()">Search</button>
+            <button class="btn btn-primary btn-square-md rounded btn-setup px-4 py-4" (click)="onClear()">Clear</button>
+          </div>
+        </div>
+        <div>
+          <hr class="hline" />
+          <div class="ps-4">
+            <div class="row">
+              <div class="col-sm ps-5 me-0 pe-0">
+                SID
+              </div>
+              <div class="col-sm me-0 pe-0">
+                Ticker
+              </div>
+              <div class="col-sm ps-0 ms-0 ">
+                Description
+              </div>
+              <div class="col-sm ps-0 ms-0">
+                Security Type
+              </div>
+              <div class="col-sm">
+                Exchange
+              </div>
+            </div>
+          </div>
+          <div class="card text-center scroll">
+            <div *ngFor="let result of results">
+              <div class="row output">
+                <div class="col-sm">
+                  <a (click)="onSelect(result)">
+                    <p class="color-blue">{{ result.sid }}</p>
+                  </a>
+                </div>
+                <div class="col-sm ps-4">
+                  <p class="ps-2">{{ result.ticker }}</p>
+                </div>
+                <div class="col-sm ps-4">
+                  <p class="overflow">{{ result.name }}</p>
+                </div>
+                <div class="col-sm text-center">
+                  <div *ngFor="let type of securityTypes">
+                    <div class="overflow" *ngIf="result.typeId==type.typeId">{{type.name}}</div>
+                  </div>
+                </div>
+                <div class="col-sm text-center">
+                  <div *ngFor="let exchange of exchanges">
+                    <div class="overflow" *ngIf="result.exchangeId==exchange.exchangeId">{{exchange.name}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

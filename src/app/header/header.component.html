@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active" routerLinkActive="active-item" [routerLinkActiveOptions]="{exact:true}">
+        <a class="nav-link fw-bolder" routerLink="/securitySearch">Security Master</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active-item">
+        <a class="nav-link" routerLink="/securitySearch">Security Search</a>
+      </li>
+      <li class="nav-item dropdown toggler">
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
+                New Security
+              </a>
+              <ul class="dropdown-menu" routerLinkActive="active">
+                <li routerLinkActive="active-item"><a class="dropdown-item" routerLink="/equity">Equity</a></li>
+                <li routerLinkActive="active-item"><a class="dropdown-item" routerLink="/equityOption">Equity Option</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>

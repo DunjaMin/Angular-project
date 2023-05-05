@@ -1,0 +1,150 @@
+<div class="row pt-5">
+  <div class="col-sm-2">
+  </div>
+  <div class="col-sm-8">
+    <p class="header fs-4 m-l" *ngIf="editMode; else elseBlock">{{securityType}}</p>
+    <ng-template #elseBlock>
+      <p class="fs-4 m-l">New {{securityType}}</p>
+    </ng-template>
+    <div class="container form-setup">
+      <form [formGroup]="form">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="input-group input-group-sm mb-1">
+              <div class="input-group-prepend">
+                <span class="input-group-text label-setup">Description:</span>
+              </div>
+              <input type="text" formControlName="name" class="form-control rounded">
+            </div>
+            <span class="text-danger" *ngIf="form.controls['name'].touched && form.controls['name'].errors">
+              This field is required!
+              Minimal lenght of description is 5 characters.
+            </span>
+            <div class="input-group input-group-sm mb-1">
+              <div class="input-group-prepend">
+                <span class="input-group-text label-setup">Ticker:</span>
+              </div>
+              <input formControlName="ticker" type="text" class="form-control rounded">
+            </div>
+            <span class="text-danger" *ngIf="form.controls['ticker'].touched && form.controls['ticker'].errors">
+              This field is required!
+            </span>
+            <div class="input-group input-group-sm mb-1">
+              <div class="input-group-prepend">
+                <span class="input-group-text label-setup">Exchange:</span>
+              </div>
+              <select class="form-select rounded" formControlName="exchangeId">
+                <option *ngFor="let exchange of exchangess" [ngValue]="exchange.exchangeId">
+                  {{exchange.name}}
+                </option>
+                <option value="Default"></option>
+              </select>
+            </div>
+            <div class="input-group input-group-sm mb-1">
+              <div class="input-group-prepend">
+                <span class="input-group-text label-setup">Currency:</span>
+              </div>
+              <select class="form-select rounded" formControlName="currencyId">
+                <option *ngFor="let currency of currencies" [ngValue]="currency.currencyId">
+                  {{currency.name}}
+                </option>
+                <option value="Default"></option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="input-group input-group-sm mb-1">
+              <div class="input-group-prepend">
+                <span class="input-group-text label-setup">Underlier SID:</span>
+              </div>
+              <select class="form-select rounded" formControlName="underlierSid">
+                <option *ngFor="let underlier of underliers" [ngValue]="underlier.sid">
+                  {{underlier.sid}} | {{underlier.ticker}}
+                </option>
+              </select>      
+            </div>
+            <span class="text-danger" *ngIf="form.controls['underlierSid'].touched && form.controls['underlierSid'].pristine">
+              This field is required!
+            </span>
+            <div class="input-group input-group-sm mb-1">
+              <div class="input-group-prepend">
+                <span class="input-group-text label-setup">Start Date:</span>
+              </div>
+              <input formControlName="startDate" type="date" class="form-control rounded">
+            </div>
+            <span class="text-danger" *ngIf="form.controls['startDate'].touched && form.controls['startDate'].pristine">
+              This field is required!
+            </span>
+            <div class="input-group input-group-sm mb-1">
+              <div class="input-group-prepend">
+                <span class="input-group-text label-setup">End Date:</span>
+              </div>
+              <input formControlName="endDate" type="date" class="form-control rounded">
+            </div>
+            <span class="text-danger" *ngIf="form.controls['endDate'].touched && form.controls['endDate'].pristine">
+              This field is required!
+            </span>
+            <span class="text-danger" *ngIf="form.errors?.['message'] ">
+              Date range is not valid!
+            </span>
+          </div>
+        </div>
+      </form>
+      <div *ngIf="securityType=='Equity Option'">
+        <div class="hrdivider">
+          <hr>
+          <span>Option Details</span>
+        </div>
+        <div>
+          <app-equity-option (pointerdown)="onClick()"></app-equity-option>
+        </div>
+      </div>
+      <div class="d-grid d-md-flex justify-content-md-end">
+        <div class="col-2 me-1">
+          <div *ngIf="securityType=='Equity' && editMode==true ">
+            <button [disabled]="form.pristine" type="button" class="btn btn-primary btn-setup"
+              (click)="onSubmit()">Update</button>
+          </div>
+          <div *ngIf="securityType=='Equity Option' && editMode==true">
+            <button [disabled]="(form.pristine && optionFormChanged==false)" type="button"
+              class="btn btn-primary btn-setup" (click)="onSubmit()">Update</button>
+          </div>
+          <div *ngIf="editMode==false">
+            <div *ngIf="securityType=='Equity'">
+              <button
+              [disabled]="!form.valid || (form.controls['endDate'].pristine || form.controls['startDate'].pristine)"
+              type="button" class="btn btn-primary btn-setup" (click)="onSubmit()">Add</button>
+            </div>
+            <div *ngIf="securityType=='Equity Option'">
+              <button
+              [disabled]="!form.valid || (form.controls['endDate'].pristine || form.controls['startDate'].pristine || form.controls['underlierSid'].pristine)"
+              type="button" class="btn btn-primary btn-setup" (click)="onSubmit()">Add</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <button type="button" class="btn btn-danger btn-setup" routerLink="/securitySearch">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="popupDiv green-background" *ngIf="showMessage==true">
+      <span>
+        Security with sid: {{activeSecurity.sid}} is added successfully. Name of the security is:
+        {{activeSecurity.name}}
+      </span>
+    </div>
+    <div class="popupDiv green-background" *ngIf="isEdited==true">
+      <span>
+        Security is edited successfully.
+      </span>
+    </div>
+    <div class="popupDiv red-background" *ngIf="errorMessage">
+      <span>
+        "Error: "{{errorMessage.error}}"
+      </span>
+    </div>
+  </div>
+  <div class="col-sm-2">
+  </div>
+</div>

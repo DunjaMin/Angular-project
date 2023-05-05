@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="container">
+    <form [formGroup]="optionForm">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="input-group input-group-sm mb-1">
+            <div class="input-group-prepend">
+              <!--TODO label-->
+              <span class="input-group-text span-width label-color ps-2">Settlement Type:</span>
+            </div>
+            <select formControlName="settlementId" class="form-select rounded ms-1">
+              <option value="1">Cash</option>
+              <option value="2">Physical</option>
+            </select>
+          </div>
+          <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+              <div class="row">
+                <div class="col-sm-6 pe-0">
+                  <div class="input-group input-group-sm">
+                    <div class="input-group-prepend ms-1 me-0">
+                      <span class="input-group-text span-width ps-1 label-color">Strike Price:</span>
+                    </div>
+                    <input formControlName="strike" type="number" class="form-control rounded ms-0">
+                  </div>
+                  <span class="text-danger"
+                    *ngIf="optionForm.controls['strike'].touched && optionForm.controls['strike'].pristine">
+                    This field is required!
+                  </span>
+                </div>
+                <div class="col-sm-6 ">
+                  <div class="input-group input-group-sm ps-5 me-0">
+                    <div class="input-group-prepend-1 pe-4">
+                      <span class="input-group-text label-color">Side:</span>
+                    </div>
+                    <select formControlName="sideId" class="form-select rounded">
+                      <option value="1">Put</option>
+                      <option value="2">Call</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 ps-0">
+          <div class="input-group input-group-sm mb-1">
+            <div class="input-group-prepend">
+              <span class="input-group-text ms-2 span-width label-color">Option Type:</span>
+            </div>
+            <select formControlName="optionStyleId" class="form-select rounded">
+              <option value="1">American</option>
+              <option value="2">Europian</option>
+            </select>
+          </div>
+          <div class="input-group input-group-sm input">
+            <div class="input-group-prepend">
+              <span class="input-group-text ms-2 span-width label-color">Expiration Date:</span>
+            </div>
+            <input formControlName="expirationTime" type="date" class="form-control rounded">
+          </div>
+          <span class="text-danger"
+            *ngIf="optionForm.controls['expirationTime'].touched && optionForm.controls['expirationTime'].pristine">
+            This field is required!
+          </span>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
